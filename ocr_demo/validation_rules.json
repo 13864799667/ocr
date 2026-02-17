@@ -1,0 +1,291 @@
+{
+  "基本指标": {
+    "体重(kg)": {
+      "min": 20.0,
+      "max": 300.0,
+      "type": "float",
+      "required": true,
+      "description": "成人体重范围，单位：千克"
+    },
+    "BMI": {
+      "min": 10.0,
+      "max": 60.0,
+      "type": "float",
+      "required": true,
+      "description": "BMI范围，中国标准：正常18.5-24.0，WHO标准：正常18.5-25.0",
+      "warning_ranges": {
+        "underweight": {"max": 18.5, "message": "体重过低"},
+        "normal_cn": {"min": 18.5, "max": 24.0, "message": "正常范围(中国标准)"},
+        "normal_who": {"min": 18.5, "max": 25.0, "message": "正常范围(WHO标准)"},
+        "overweight_cn": {"min": 24.0, "max": 28.0, "message": "超重(中国标准)"},
+        "overweight_who": {"min": 25.0, "max": 30.0, "message": "超重(WHO标准)"},
+        "obese_cn": {"min": 28.0, "message": "肥胖(中国标准)"},
+        "obese_who": {"min": 30.0, "message": "肥胖(WHO标准)"}
+      }
+    },
+    "体脂率(%)": {
+      "min": 3.0,
+      "max": 60.0,
+      "type": "float",
+      "required": true,
+      "description": "体脂率范围，男性正常10-25%，女性正常17-32%",
+      "gender_specific": {
+        "male": {
+          "healthy": {"min": 10, "max": 20},
+          "acceptable": {"min": 20, "max": 25},
+          "obese": {"min": 25}
+        },
+        "female": {
+          "healthy": {"min": 17, "max": 24},
+          "acceptable": {"min": 24, "max": 30},
+          "obese": {"min": 30}
+        }
+      },
+      "warning_ranges": {
+        "too_low_male": {"max": 5, "message": "体脂率过低(男性<5%)，可能影响健康"},
+        "too_low_female": {"max": 13, "message": "体脂率过低(女性<13%)，可能影响健康"},
+        "high": {"min": 35, "message": "体脂率较高，建议关注"}
+      }
+    },
+    "骨骼肌(kg)": {
+      "min": 8.0,
+      "max": 80.0,
+      "type": "float",
+      "required": true,
+      "description": "骨骼肌重量，男性约占体重35-45%，女性约占体重28-35%",
+      "percentage_ranges": {
+        "male": {"min": 0.30, "max": 0.50},
+        "female": {"min": 0.25, "max": 0.40}
+      }
+    }
+  },
+  "成分分析": {
+    "水分含量(kg)": {
+      "min": 15.0,
+      "max": 80.0,
+      "type": "float",
+      "required": true,
+      "description": "身体水分含量，男性50-65%，女性45-60%",
+      "percentage_ranges": {
+        "male": {"min": 0.50, "max": 0.65},
+        "female": {"min": 0.45, "max": 0.60}
+      }
+    },
+    "蛋白质(kg)": {
+      "min": 5.0,
+      "max": 30.0,
+      "type": "float",
+      "required": true,
+      "description": "身体蛋白质含量，约占体重16-20%",
+      "percentage_range": {"min": 0.16, "max": 0.20}
+    },
+    "无机盐(kg)": {
+      "min": 1.0,
+      "max": 8.0,
+      "type": "float",
+      "required": true,
+      "description": "身体无机盐含量，约占体重3-5%",
+      "percentage_range": {"min": 0.03, "max": 0.05}
+    }
+  },
+  "节段肌肉": {
+    "节段肌肉(kg)-左臂": {
+      "min": 0.8,
+      "max": 8.0,
+      "type": "float",
+      "required": false,
+      "description": "左臂肌肉重量，无统一绝对范围，重点关注均衡性",
+      "allow_negative": false
+    },
+    "节段肌肉(kg)-右臂": {
+      "min": 0.8,
+      "max": 8.0,
+      "type": "float",
+      "required": false,
+      "description": "右臂肌肉重量，无统一绝对范围，重点关注均衡性",
+      "allow_negative": false
+    },
+    "节段肌肉(kg)-躯干": {
+      "min": 12.0,
+      "max": 45.0,
+      "type": "float",
+      "required": false,
+      "description": "躯干肌肉重量，通常是最大的节段",
+      "allow_negative": false
+    },
+    "节段肌肉(kg)-左腿": {
+      "min": 3.0,
+      "max": 25.0,
+      "type": "float",
+      "required": false,
+      "description": "左腿肌肉重量，无统一绝对范围，重点关注均衡性",
+      "allow_negative": false
+    },
+    "节段肌肉(kg)-右腿": {
+      "min": 3.0,
+      "max": 25.0,
+      "type": "float",
+      "required": false,
+      "description": "右腿肌肉重量，无统一绝对范围，重点关注均衡性",
+      "allow_negative": false
+    }
+  },
+  "其他指标": {
+    "浮肿评估": {
+      "min": -15,
+      "max": 15,
+      "type": "float",
+      "required": false,
+      "description": "浮肿评估，基于ECW/TBW比值：正常0.360-0.390，警戒0.390-0.400，异常>0.400",
+      "allow_negative": true,
+      "ecw_tbw_ranges": {
+        "normal": {"min": 0.360, "max": 0.390, "message": "水分平衡正常"},
+        "warning": {"min": 0.390, "max": 0.400, "message": "轻度水肿倾向"},
+        "abnormal": {"min": 0.400, "message": "水肿，建议医学评估"}
+      }
+    },
+    "腰臀比": {
+      "min": 0.5,
+      "max": 1.5,
+      "type": "float",
+      "required": false,
+      "description": "腰臀比，WHO标准：男性<0.90，女性<0.85为理想",
+      "gender_specific": {
+        "male": {
+          "ideal": {"max": 0.90},
+          "risk": {"min": 0.90}
+        },
+        "female": {
+          "ideal": {"max": 0.85},
+          "risk": {"min": 0.85}
+        }
+      }
+    },
+    "内脏脂肪等级": {
+      "min": 1,
+      "max": 30,
+      "type": "int",
+      "required": false,
+      "description": "内脏脂肪等级，1-9正常，10-14偏高，15+高风险",
+      "level_ranges": {
+        "normal": {"min": 1, "max": 9, "message": "正常范围"},
+        "elevated": {"min": 10, "max": 14, "message": "偏高，需要注意"},
+        "high": {"min": 15, "message": "高风险，建议医学评估"}
+      }
+    },
+    "基础代谢(kcal/day)": {
+      "min": 800,
+      "max": 3500,
+      "type": "int",
+      "required": false,
+      "description": "基础代谢率，男性1400-1800，女性1000-1400（大致范围）",
+      "gender_ranges": {
+        "male": {"min": 1200, "max": 2200},
+        "female": {"min": 900, "max": 1600}
+      }
+    },
+    "健康分数": {
+      "min": 0,
+      "max": 100,
+      "type": "float",
+      "required": false,
+      "description": "健康评分，InBody标准：70-79正常，80-89强壮，90+非常强壮",
+      "score_ranges": {
+        "needs_improvement": {"max": 70, "message": "需要改善"},
+        "normal": {"min": 70, "max": 79, "message": "正常"},
+        "strong": {"min": 80, "max": 89, "message": "强壮(肌肉型)"},
+        "very_strong": {"min": 90, "message": "非常强壮"}
+      }
+    }
+  },
+  "逻辑关系": {
+    "体重组成": {
+      "description": "体重应该大致等于各成分之和(水分+蛋白质+无机盐+脂肪)",
+      "tolerance": 0.15,
+      "components": ["水分含量(kg)", "蛋白质(kg)", "无机盐(kg)", "体脂重量"],
+      "note": "15%的误差容忍度，考虑到测量误差和骨骼重量",
+      "enabled": true
+    },
+    "BMI计算验证": {
+      "description": "BMI = 体重(kg) / 身高(m)²，基于估算身高验证合理性",
+      "height_estimates": [1.6, 1.65, 1.7, 1.75, 1.8],
+      "tolerance": 0.25,
+      "note": "基于常见身高范围估算，25%误差容忍度",
+      "enabled": true
+    },
+    "节段肌肉对称性": {
+      "description": "左右肢体肌肉重量应该相近，重点关注均衡发展",
+      "tolerance": 0.25,
+      "pairs": [
+        ["节段肌肉(kg)-左臂", "节段肌肉(kg)-右臂"],
+        ["节段肌肉(kg)-左腿", "节段肌肉(kg)-右腿"]
+      ],
+      "note": "25%的差异容忍度，考虑到惯用手/腿的差异",
+      "enabled": true
+    },
+    "体脂率与BMI相关性": {
+      "description": "体脂率应该与BMI有一定相关性，但需考虑肌肉型体质",
+      "tolerance": 0.3,
+      "note": "BMI高时体脂率通常也较高，但存在肌肉型肥胖等特殊情况",
+      "enabled": true,
+      "correlation_rules": {
+        "low_bmi_high_fat": {"bmi_max": 20, "fat_min": 25, "message": "BMI较低但体脂率较高，可能存在隐性肥胖"},
+        "high_bmi_low_fat": {"bmi_min": 27, "fat_max": 15, "message": "BMI较高但体脂率较低，可能为肌肉型体质"}
+      }
+    },
+    "骨骼肌率合理性": {
+      "description": "骨骼肌重量占体重的比例应在合理范围内",
+      "enabled": true,
+      "gender_specific": {
+        "male": {"min_ratio": 0.30, "max_ratio": 0.50},
+        "female": {"min_ratio": 0.25, "max_ratio": 0.40}
+      },
+      "note": "基于性别的骨骼肌率正常范围"
+    },
+    "水分含量合理性": {
+      "description": "身体水分含量应与肌肉量相关，肌肉组织含水量高",
+      "enabled": true,
+      "note": "水分含量与肌肉量密切相关，脂肪组织含水量较低"
+    }
+  },
+  "数据质量": {
+    "完整性要求": {
+      "必填字段最低比例": 0.8,
+      "可选字段最低比例": 0.6,
+      "description": "数据完整性要求，基于临床应用需求"
+    },
+    "一致性检查": {
+      "数值精度": 2,
+      "异常值检测": true,
+      "description": "数据一致性检查规则，确保测量精度"
+    },
+    "临床意义评估": {
+      "enabled": true,
+      "description": "评估数据的临床意义和健康风险"
+    }
+  },
+  "年龄性别调整": {
+    "体脂率年龄调整": {
+      "enabled": false,
+      "description": "30岁以上体脂率正常范围可适当放宽",
+      "age_groups": {
+        "under_30": {"male": {"min": 14, "max": 20}, "female": {"min": 17, "max": 24}},
+        "over_30": {"male": {"min": 17, "max": 23}, "female": {"min": 20, "max": 27}}
+      }
+    },
+    "老年人BMI调整": {
+      "enabled": false,
+      "description": "65岁以上老年人BMI适宜范围可略高(22.0-26.9)",
+      "elderly_bmi_range": {"min": 22.0, "max": 26.9}
+    }
+  },
+  "肌肉减少症筛查": {
+    "enabled": false,
+    "description": "基于EWGSOP2和AWGS标准的肌肉减少症筛查",
+    "asmi_cutoffs": {
+      "ewgsop2": {"male": 7.0, "female": 5.5},
+      "awgs": {"male": 7.0, "female": 5.4}
+    },
+    "note": "需要身高数据才能计算ASMI(四肢骨骼肌质量指数)"
+  }
+} 

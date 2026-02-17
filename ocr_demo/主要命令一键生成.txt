@@ -1,0 +1,19 @@
+1.一键处理示例
+处理datasets目录中的所有长图，并将结果保存到paddle_results.xlsx文件：
+python one_key_process.py datasets/ --excel results.xlsx --roi_dir paddle_roi_images
+2.只进行OCR识别（不重新分割图片）：
+python one_key_process.py datasets/ --excel results.xlsx --no_split
+
+python one_key_process.py datasets/ --output_dir all_output --excel results.xlsx   --roi_dir roi_images --roi_expand 15 --debug
+
+python one_key_process.py datasets --excel result.xlsx --debug
+
+
+
+    ### 使用默认 12 进程并行处理(728行修改进程数)
+    python one_key_process.py datasets/ --excel results.xlsx
+    
+    ### 压缩指令
+    zip -r roi_images.zip /home/lys/ocr_demo/roi_images
+    zip -r all_color_output.zip /home/lys/ocr_demo/all_color_output
+    
